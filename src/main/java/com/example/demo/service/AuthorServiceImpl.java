@@ -57,7 +57,12 @@ public class AuthorServiceImpl implements AuthorService {
                 .orElseThrow(() -> new RuntimeException("Author not found"));
 
         // Set the author for the book
-        book.setAuthor(author);
+         book.setAuthor(author);
+         book.setTitle(book.getTitle());
+         book.setDescription(book.getDescription());
+         book.setAuthor(author);
+         book.setLink(book.getLink()); // new field
+
 
         // Save the new book
         return bookRepository.save(book);
@@ -102,7 +107,7 @@ public class AuthorServiceImpl implements AuthorService {
         // Update the book details
         existingBook.setTitle(updatedBook.getTitle());
         existingBook.setDescription(updatedBook.getDescription());
-
+        existingBook.setLink(updatedBook.getLink());
         // Save the updated book
         return bookRepository.save(existingBook);
     }

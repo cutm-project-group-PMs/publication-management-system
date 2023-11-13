@@ -16,7 +16,11 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "author_email", referencedColumnName = "email", nullable = false)
     private Author author;
-
+    
+    //====================== used to add link =====================
+    private String link;
+    
+    
 	public Long getId() {
 		return id;
 	}
@@ -47,6 +51,14 @@ public class Book {
 
 	public void setAuthor(Author author) {
 		this.author = author;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
     // Constructors, getters, setters...
