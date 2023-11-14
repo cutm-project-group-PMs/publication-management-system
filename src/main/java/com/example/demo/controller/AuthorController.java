@@ -93,7 +93,7 @@ public class AuthorController {
         return ResponseEntity.noContent().build();
     }
 
-  //===============================update book======================================================
+  //===============================update book, update title, descriptiona nd link aslo=====================================================
 
     @PutMapping("/books/{bookId}")
     public ResponseEntity<Book> updateBook(
@@ -104,4 +104,18 @@ public class AuthorController {
         Book updated = authorService.updateBook(authorEmail, bookId, updatedBook);
         return ResponseEntity.ok(updated);
     }
+    //======================================get author Id By authorEmail for create new page and content=======================
+
+	@Autowired
+	AuthorRepository authorRepository;
+    
+    @GetMapping("/byEmail")
+    public ResponseEntity<Long> getAuthorIdByEmail(@RequestParam String email) {
+        Optional<Author> authorOptional = authorRepository.findByEmail(email);
+
+        return authorOptional.map(author -> ResponseEntity.ok(author.getId()))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
+    
 }
